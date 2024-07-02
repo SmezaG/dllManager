@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "dllManager": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SRV_WEB_01": "192.168.2.21",
+        "SERVICE_NAME": "Inforges CommunicationsCore Service",
+        "SRV_WEB_02": "192.168.2.22",
+        "SERVER_PROD_NAME": "SERVERSAP",
+        "SERVER_PROD_PATH": "\\\\serversap\\b1_shr\\SGI",
+        "SERVER_TEST_NAME": "SAPDSR",
+        "SERVER_TEST_PATH": "\\\\SAPDSR\\b1_shr\\SGI",
+        "PROD_LOCAL_PATH": "\\\\orddesprod0\\c$\\Mis Addons2\\PANAMA",
+        "TEST_LOCAL_PATH": "\\\\orddesprod6\\c$\\Mis Addons2\\PANAMA"
+      }
+    }
+  }
+}
