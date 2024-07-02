@@ -16,6 +16,10 @@ namespace dllManager
         private string _ServiceName = "";
         private string _srvWeb01 = "";
         private string _srvWeb02 = "";
+        private string _TestServiceName = "";
+        private string _TestServicepath = "";
+        private string _WebTest = "";
+
 
         public Utils _utils = new Utils();
         public MainForm()
@@ -36,6 +40,9 @@ namespace dllManager
             _ServerTestPath = Environment.GetEnvironmentVariable("SERVER_TEST_PATH") ?? "";
             _ProdLocalPath = Environment.GetEnvironmentVariable("PROD_LOCAL_PATH") ?? "";
             _TestLocalPath = Environment.GetEnvironmentVariable("TEST_LOCAL_PATH") ?? "";
+            _TestServiceName = Environment.GetEnvironmentVariable("TEST_SERVICE_NAME") ?? "";
+            _TestServicepath = Environment.GetEnvironmentVariable("TEST_SERVICE_PATH") ?? "";
+            _WebTest = Environment.GetEnvironmentVariable("WEBTEST") ?? "";
 
             rbProd.Text = _ServerProdName;
             rbTest.Text = _ServerTestname;
@@ -112,16 +119,19 @@ namespace dllManager
                                 newPath = $"{selectedServerPath}/{CheckBox.Text}_old";
 
 
-                                if (_utils.GetTimeBetweenCreateDateAndNow(originpath) >= 5)
+                                if (_utils.GetTimeBetweenCreateDateAndNow($"{selectedLocalPath}/{CheckBox.Text}") >= 5)
                                 {
                                     DialogResult result = MessageBox.Show($"La dll {CheckBox.Text} no ha sido modificada en mas de 5 minutos. ¿estás seguro que quieres copiarla al servidor?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                                     if (result == DialogResult.No)
                                     {
+                                        if (CheckBox.Text == "PJ_WEBSERVICE_ICCS.dll")
+                                        {
+                                            webServiceReset = false;
+                                        }
                                         continue;
                                     }
 
                                 }
-
 
                                 if (File.Exists(newPath))
                                 {
@@ -147,6 +157,32 @@ namespace dllManager
                     }
                 }
 
+                if (webServiceReset)
+                {
+                    string question = "";
+                    if (rbTest.Checked)
+                    {
+                        question = "el servicio web de test";
+                    }
+                    else if (rbProd.Checked)
+                    {
+                        question = "los srvweb 01 y 02";
+                    }
+
+                    DialogResult result = MessageBox.Show($"Se ha copiado la dll PJ_WEBSERVICE_ICCS.dll, ¿Quieres reiniciar {question}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        if (rbTest.Checked)
+                        {
+                            
+                        }
+                        else if (rbProd.Checked)
+                        {
+                            _utils.ResetProductionServices(_ServerProdName, _srvWeb01, _srvWeb02);
+                        }
+                    }
+                }
+
                 MessageBox.Show($"Proceso completado correctamente", "Completado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -163,25 +199,11 @@ namespace dllManager
 
             if (rbTest.Checked)
             {
-
+                _utils.ResetTestServices(_TestServiceName, _WebTest, _TestServicepath);
             }
             else if (rbProd.Checked)
             {
-                ret = _utils.StopService(_ServiceName, _srvWeb01);
-
-                if (!string.IsNullOrEmpty(ret))
-                {
-                    MessageBox.Show($"Error deteniendo el servicio {ret}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                }
-
-                ret = _utils.StopService(_ServiceName, _srvWeb02);
-
-                if (!string.IsNullOrEmpty(ret))
-                {
-                    MessageBox.Show($"Error deteniendo el servicio {ret}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                }
+                _utils.ResetProductionServices(_ServiceName, _srvWeb01, _srvWeb02);
             }
         }
     }

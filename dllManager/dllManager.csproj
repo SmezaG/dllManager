@@ -10,10 +10,12 @@
 
   <ItemGroup>
     <None Remove="Scripts\servicestop.bat" />
+    <None Remove="Scripts\serviceteststop.bat" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\servicestop.bat" />
+    <EmbeddedResource Include="Scripts\serviceteststop.bat" />
   </ItemGroup>
 
   <ItemGroup>

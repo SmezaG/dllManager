@@ -11,7 +11,10 @@
         "SERVER_TEST_NAME": "SAPDSR",
         "SERVER_TEST_PATH": "\\\\SAPDSR\\b1_shr\\SGI",
         "PROD_LOCAL_PATH": "\\\\orddesprod0\\c$\\Mis Addons2\\PANAMA",
-        "TEST_LOCAL_PATH": "\\\\orddesprod6\\c$\\Mis Addons2\\PANAMA"
+        "TEST_LOCAL_PATH": "\\\\orddesprod6\\c$\\Mis Addons2\\PANAMA",
+        "TEST_SERVICE_NAME": "ICCSLoader.exe - Acceso directo",
+        "TEST_SERVICE_PATH": "\\\\webtest\\c$\\Program Files (x86)\\Inforges\\Inforges CommunicationsCore for SAP",
+        "WEBTEST": "192.168.2.23"
       }
     }
   }

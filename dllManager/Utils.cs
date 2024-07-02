@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace dllManager
 {
@@ -28,10 +30,11 @@ namespace dllManager
             return checkBoxes;
         }
 
-        public string StopService(string serviceName, string remoteServer)
+        public string StopService(string serviceName, string remoteServer, bool produccion, string exepath)
         {
 
             string err = "";
+            string servicio = "";
 
             if (string.IsNullOrEmpty(serviceName) || string.IsNullOrEmpty(remoteServer))
             {
@@ -39,15 +42,25 @@ namespace dllManager
                 return err;
             }
 
-            err = ExecuteEmbeddedBatFile("dllManager.Scripts.servicestop.bat", serviceName, remoteServer);
+            if (produccion)
+            {
+                servicio = "dllManager.Scripts.servicestop.bat";
+            }
+            else
+            {
+                servicio = "dllManager.Scripts.serviceteststop.bat";
+            }
+
+            err = ExecuteEmbeddedBatFile(servicio, serviceName, remoteServer, produccion, exepath);
 
             return err;
         }
 
-        static string ExecuteEmbeddedBatFile(string resourceName, string serviceName, string remoteServer)
+        static string ExecuteEmbeddedBatFile(string resourceName, string serviceName, string remoteServer, bool produccion, string exepath)
         {
+            string resourcenameSubstring = resourceName;
             var assembly = Assembly.GetExecutingAssembly();
-            string tempBatPath = Path.Combine(Path.GetTempPath(), "servicestop.bat");
+            string tempBatPath = Path.Combine(Path.GetTempPath(), resourcenameSubstring.Replace("dllManager.Scripts.",""));
 
             try
             {
@@ -66,11 +79,19 @@ namespace dllManager
 
                 var processInfo = new ProcessStartInfo();
                 processInfo.FileName = tempBatPath;
-                processInfo.Arguments = $"\"{serviceName}\" \"{remoteServer}\"";
+               
                 processInfo.RedirectStandardOutput = true;
                 processInfo.RedirectStandardError = true;
                 processInfo.UseShellExecute = false;
                 processInfo.CreateNoWindow = true;
+                if (produccion)
+                {
+                    processInfo.Arguments = $"\"{serviceName}\" \"{remoteServer}\"";
+                }
+                else
+                {
+                    processInfo.Arguments = $"\"{serviceName}\" \"{exepath}\" \"{remoteServer}\"";
+                }
 
                 using (Process process = Process.Start(processInfo))
                 {
@@ -115,6 +136,33 @@ namespace dllManager
             DateTime currentTime = DateTime.Now;
             TimeSpan timeDifference = currentTime - lastWriteTime;
             return (int)timeDifference.TotalMinutes;
+        }
+
+        public void ResetProductionServices(string servicename, string web01, string web02)
+        {
+            string err = "";
+
+            err = StopService(servicename, web01,true,"");
+
+            if (!string.IsNullOrEmpty(err))
+            {
+                MessageBox.Show($"Error deteniendo el servicio {err}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+            err = StopService(servicename, web02, true, "");
+
+            if (!string.IsNullOrEmpty(err))
+            {
+                MessageBox.Show($"Error deteniendo el servicio {err}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
+        public void ResetTestServices(string servicename,string webtest, string exepath)
+        {
+            string err = "";
+            err = StopService(servicename, webtest, false, exepath);
         }
 
 
