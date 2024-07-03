@@ -220,7 +220,7 @@
             // 
             // btnResetSW
             // 
-            btnResetSW.Location = new Point(290, 256);
+            btnResetSW.Location = new Point(519, 105);
             btnResetSW.Name = "btnResetSW";
             btnResetSW.Size = new Size(122, 70);
             btnResetSW.TabIndex = 15;

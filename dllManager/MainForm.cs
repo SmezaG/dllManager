@@ -1,8 +1,3 @@
-using System.Diagnostics;
-using System.Reflection;
-using System.ServiceProcess;
-using System.Windows.Forms;
-
 namespace dllManager
 {
     public partial class MainForm : Form
@@ -19,18 +14,17 @@ namespace dllManager
         private string _TestServiceName = "";
         private string _TestServicepath = "";
         private string _WebTest = "";
-
+        private string _AutoltScriptPath = "";
 
         public Utils _utils = new Utils();
+
         public MainForm()
         {
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
-
             _ServiceName = Environment.GetEnvironmentVariable("SERVICE_NAME") ?? "";
             _srvWeb01 = Environment.GetEnvironmentVariable("SRV_WEB_01") ?? "";
             _srvWeb02 = Environment.GetEnvironmentVariable("SRV_WEB_02") ?? "";
@@ -43,16 +37,14 @@ namespace dllManager
             _TestServiceName = Environment.GetEnvironmentVariable("TEST_SERVICE_NAME") ?? "";
             _TestServicepath = Environment.GetEnvironmentVariable("TEST_SERVICE_PATH") ?? "";
             _WebTest = Environment.GetEnvironmentVariable("WEBTEST") ?? "";
+            _AutoltScriptPath = Environment.GetEnvironmentVariable("AUTOLT_SCRIPT_PATH") ?? "";
 
             rbProd.Text = _ServerProdName;
             rbTest.Text = _ServerTestname;
-
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             string originpath = "";
             string newPath = "";
             string selectedServerPath = "";
@@ -74,7 +66,6 @@ namespace dllManager
                 selectedLocalPath = _TestLocalPath;
                 selectedServerPathOriginal = _ServerTestPath;
                 selectedLocalPathOriginal = _TestLocalPath;
-
             }
 
             List<CheckBox> allDlls = _utils.GetAllCheckBoxes(panelDll);
@@ -83,10 +74,8 @@ namespace dllManager
             {
                 foreach (CheckBox CheckBox in allDlls)
                 {
-
                     if (CheckBox.Checked)
                     {
-
                         if (CheckBox.Text.Contains("Intercompany"))
                         {
                             if (CheckBox.Text == "PJ_Intercompany_SPFY.dll")
@@ -108,16 +97,12 @@ namespace dllManager
                             webServiceReset = true;
                         }
 
-
-
                         if (File.Exists($"{selectedLocalPath}/{CheckBox.Text}"))
                         {
                             if (File.Exists($"{selectedServerPath}/{CheckBox.Text}"))
                             {
-
                                 originpath = $"{selectedServerPath}/{CheckBox.Text}";
                                 newPath = $"{selectedServerPath}/{CheckBox.Text}_old";
-
 
                                 if (_utils.GetTimeBetweenCreateDateAndNow($"{selectedLocalPath}/{CheckBox.Text}") >= 5)
                                 {
@@ -130,7 +115,6 @@ namespace dllManager
                                         }
                                         continue;
                                     }
-
                                 }
 
                                 if (File.Exists(newPath))
@@ -143,7 +127,6 @@ namespace dllManager
                                 originpath = $"{selectedLocalPath}/{CheckBox.Text}";
                                 newPath = $"{selectedServerPath}/{CheckBox.Text}";
                                 File.Copy(originpath, newPath);
-
                             }
                             else
                             {
@@ -174,7 +157,6 @@ namespace dllManager
                     {
                         if (rbTest.Checked)
                         {
-                            
                         }
                         else if (rbProd.Checked)
                         {
@@ -189,17 +171,14 @@ namespace dllManager
             {
                 MessageBox.Show($"Error general {ex.ToString}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
-
 
         private void btnResetSW_Click(object sender, EventArgs e)
         {
-            string ret = "";
-
             if (rbTest.Checked)
             {
-                _utils.ResetTestServices(_TestServiceName, _WebTest, _TestServicepath);
+                //_utils.ResetTestServices(_TestServiceName, _WebTest, _TestServicepath, _AutoltScriptPath);
+                MessageBox.Show($"Por ahora no tenemos implementada esta función para {_ServerTestname}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (rbProd.Checked)
             {
@@ -207,5 +186,4 @@ namespace dllManager
             }
         }
     }
-
 }

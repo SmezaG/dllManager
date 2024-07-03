@@ -5,6 +5,7 @@ rem Leer variables de entorno
 set "EXE_NAME=%~1"
 set "EXE_PATH=%~2"
 set "REMOTE_SERVER=%~3"
+set "AUTOIT_SCRIPT_PATH=%~4"
 
 rem Verificar si las variables están configuradas
 if "%EXE_NAME%"=="" (
@@ -25,12 +26,18 @@ if "%REMOTE_SERVER%"=="" (
     exit /b 1
 )
 
+if "%AUTOIT_SCRIPT_PATH%"=="" (
+    echo Error: La variable de entorno AUTOIT_SCRIPT_PATH no está configurada.
+    endlocal
+    exit /b 1
+)
+
 rem Detener el proceso
 echo Deteniendo el proceso %EXE_NAME% en el servidor %REMOTE_SERVER%
-psexec \\%REMOTE_SERVER% taskkill /IM %EXE_NAME% /F
+psexec \\%REMOTE_SERVER% taskkill /IM "%EXE_NAME%" /F
 
 rem Verificar si el proceso se detuvo
-psexec \\%REMOTE_SERVER% tasklist | find "%EXE_NAME%" >nul
+rem psexec \\%REMOTE_SERVER% tasklist | find "%EXE_NAME%" >nul
 if %errorlevel% == 0 (
     echo Error: No se pudo detener el proceso %EXE_NAME%.
     endlocal
@@ -39,16 +46,8 @@ if %errorlevel% == 0 (
     echo El proceso %EXE_NAME% se ha detenido correctamente.
 )
 
-rem Iniciar el proceso de nuevo
-echo Iniciando el proceso %EXE_NAME% en el servidor %REMOTE_SERVER%
-psexec \\%REMOTE_SERVER% %EXE_PATH%
-
-rem Verificar si el proceso se inició correctamente
-psexec \\%REMOTE_SERVER% tasklist | find "%EXE_NAME%" >nul
-if %errorlevel% == 0 (
-    echo El proceso %EXE_NAME% se ha iniciado correctamente.
-) else (
-    echo Error: No se pudo iniciar el proceso %EXE_NAME%.
-)
+rem Ejecutar el script de AutoIt para reiniciar la aplicación y hacer clic en OK
+echo Ejecutando el script de AutoIt en el servidor %REMOTE_SERVER%
+psexec \\%REMOTE_SERVER% "\\webtest\c$\Program Files (x86)\AutoIt3\AutoIt3.exe" "%AUTOIT_SCRIPT_PATH%"
 
 endlocal

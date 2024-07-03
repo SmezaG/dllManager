@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Reflection;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace dllManager
 {
     public class Utils
     {
-
         public List<CheckBox> GetAllCheckBoxes(Control control)
         {
             List<CheckBox> checkBoxes = new List<CheckBox>();
@@ -30,9 +22,40 @@ namespace dllManager
             return checkBoxes;
         }
 
-        public string StopService(string serviceName, string remoteServer, bool produccion, string exepath)
+        public int GetTimeBetweenCreateDateAndNow(string file)
         {
+            DateTime lastWriteTime = File.GetLastWriteTime(file);
+            DateTime currentTime = DateTime.Now;
+            TimeSpan timeDifference = currentTime - lastWriteTime;
+            return (int)timeDifference.TotalMinutes;
+        }
 
+        public void ResetProductionServices(string servicename, string web01, string web02)
+        {
+            string err = "";
+
+            err = StopService(servicename, web01, true);
+
+            if (!string.IsNullOrEmpty(err))
+            {
+                MessageBox.Show($"Error deteniendo el servicio {err}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            err = StopService(servicename, web02, true);
+
+            if (!string.IsNullOrEmpty(err))
+            {
+                MessageBox.Show($"Error deteniendo el servicio {err}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void ResetTestServices(string servicename, string webtest, string exepath, string autoltPath)
+        {
+            //para cuando implementemos prepro
+        }
+
+        public string StopService(string serviceName, string remoteServer, bool produccion)
+        {
             string err = "";
             string servicio = "";
 
@@ -51,16 +74,16 @@ namespace dllManager
                 servicio = "dllManager.Scripts.serviceteststop.bat";
             }
 
-            err = ExecuteEmbeddedBatFile(servicio, serviceName, remoteServer, produccion, exepath);
+            err = ExecuteEmbeddedBatFile(servicio, serviceName, remoteServer, produccion);
 
             return err;
         }
 
-        static string ExecuteEmbeddedBatFile(string resourceName, string serviceName, string remoteServer, bool produccion, string exepath)
+        private static string ExecuteEmbeddedBatFile(string resourceName, string serviceName, string remoteServer, bool produccion)
         {
             string resourcenameSubstring = resourceName;
             var assembly = Assembly.GetExecutingAssembly();
-            string tempBatPath = Path.Combine(Path.GetTempPath(), resourcenameSubstring.Replace("dllManager.Scripts.",""));
+            string tempBatPath = Path.Combine(Path.GetTempPath(), resourcenameSubstring.Replace("dllManager.Scripts.", ""));
 
             try
             {
@@ -79,7 +102,7 @@ namespace dllManager
 
                 var processInfo = new ProcessStartInfo();
                 processInfo.FileName = tempBatPath;
-               
+
                 processInfo.RedirectStandardOutput = true;
                 processInfo.RedirectStandardError = true;
                 processInfo.UseShellExecute = false;
@@ -90,7 +113,7 @@ namespace dllManager
                 }
                 else
                 {
-                    processInfo.Arguments = $"\"{serviceName}\" \"{exepath}\" \"{remoteServer}\"";
+                    //Para cuando implementemos prepro
                 }
 
                 using (Process process = Process.Start(processInfo))
@@ -109,12 +132,9 @@ namespace dllManager
                         {
                             return $"Errores: {errors}";
                         }
-
                     }
                     return "";
-
                 }
-               
             }
             catch (Exception ex)
             {
@@ -127,44 +147,6 @@ namespace dllManager
                     File.Delete(tempBatPath);
                 }
             }
-
         }
-
-        public int GetTimeBetweenCreateDateAndNow(string file)
-        {
-            DateTime lastWriteTime = File.GetLastWriteTime(file);
-            DateTime currentTime = DateTime.Now;
-            TimeSpan timeDifference = currentTime - lastWriteTime;
-            return (int)timeDifference.TotalMinutes;
-        }
-
-        public void ResetProductionServices(string servicename, string web01, string web02)
-        {
-            string err = "";
-
-            err = StopService(servicename, web01,true,"");
-
-            if (!string.IsNullOrEmpty(err))
-            {
-                MessageBox.Show($"Error deteniendo el servicio {err}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-
-            err = StopService(servicename, web02, true, "");
-
-            if (!string.IsNullOrEmpty(err))
-            {
-                MessageBox.Show($"Error deteniendo el servicio {err}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-        }
-
-        public void ResetTestServices(string servicename,string webtest, string exepath)
-        {
-            string err = "";
-            err = StopService(servicename, webtest, false, exepath);
-        }
-
-
     }
 }
