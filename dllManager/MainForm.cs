@@ -1,3 +1,5 @@
+using DotNetEnv;
+
 namespace dllManager
 {
     public partial class MainForm : Form
@@ -25,6 +27,9 @@ namespace dllManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            Env.Load();
+
             _ServiceName = Environment.GetEnvironmentVariable("SERVICE_NAME") ?? "";
             _srvWeb01 = Environment.GetEnvironmentVariable("SRV_WEB_01") ?? "";
             _srvWeb02 = Environment.GetEnvironmentVariable("SRV_WEB_02") ?? "";
