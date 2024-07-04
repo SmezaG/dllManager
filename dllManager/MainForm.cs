@@ -125,7 +125,14 @@ namespace dllManager
 
                                 if (File.Exists(newPath))
                                 {
-                                    File.Delete(newPath);
+                                    try
+                                    {
+                                        File.Delete(newPath);
+                                    }
+                                    catch(Exception ex) 
+                                    {
+                                        File.Move(newPath, string.Concat(newPath,Guid.NewGuid()));
+                                    }
                                 }
 
                                 File.Move(originpath, newPath);
