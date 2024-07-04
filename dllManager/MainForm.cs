@@ -22,6 +22,7 @@ namespace dllManager
 
         public MainForm()
         {
+            this.Icon = new Icon("Recursos/sergi.logo.ico");
             InitializeComponent();
         }
 

@@ -6,16 +6,21 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>Recursos\sergi.logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove=".env" />
+    <None Remove="Recursos\sergi.logo.ico" />
     <None Remove="Scripts\servicestop.bat" />
     <None Remove="Scripts\serviceteststop.bat" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include=".env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recursos\sergi.logo.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\servicestop.bat" />

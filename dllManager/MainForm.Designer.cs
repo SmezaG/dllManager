@@ -239,7 +239,7 @@
             Controls.Add(panelDll);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Administrador de dlls";
             Load += Form1_Load;
             panelDll.ResumeLayout(false);
             panelDll.PerformLayout();
