@@ -1,6 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Reflection;
-using System.ServiceProcess;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace dllManager
 {
@@ -147,6 +148,19 @@ namespace dllManager
                 {
                     File.Delete(tempBatPath);
                 }
+            }
+        }
+
+        public void OpenXmlWithNotepad(string filePath)
+        {
+            try
+            {
+                string notepadPlusPlusPath = "C:\\Program Files (x86)\\Notepad++\\Notepad++.exe"; // Ruta al ejecutable de Notepad++
+                Process.Start(notepadPlusPlusPath, $"\"{filePath}\"");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
             }
         }
     }

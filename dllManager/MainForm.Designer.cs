@@ -45,6 +45,9 @@
             panel1 = new Panel();
             label2 = new Label();
             btnResetSW = new Button();
+            btnLogs = new Button();
+            rbWeb01 = new RadioButton();
+            rbWeb02 = new RadioButton();
             panelDll.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -228,11 +231,46 @@
             btnResetSW.UseVisualStyleBackColor = true;
             btnResetSW.Click += btnResetSW_Click;
             // 
+            // btnLogs
+            // 
+            btnLogs.Location = new Point(519, 194);
+            btnLogs.Name = "btnLogs";
+            btnLogs.Size = new Size(122, 70);
+            btnLogs.TabIndex = 16;
+            btnLogs.Text = "Logs SW";
+            btnLogs.UseVisualStyleBackColor = true;
+            btnLogs.Click += btnLogs_Click;
+            // 
+            // rbWeb01
+            // 
+            rbWeb01.AutoSize = true;
+            rbWeb01.Checked = true;
+            rbWeb01.Location = new Point(659, 205);
+            rbWeb01.Name = "rbWeb01";
+            rbWeb01.Size = new Size(81, 19);
+            rbWeb01.TabIndex = 17;
+            rbWeb01.TabStop = true;
+            rbWeb01.Text = "SRVWEB01";
+            rbWeb01.UseVisualStyleBackColor = true;
+            // 
+            // rbWeb02
+            // 
+            rbWeb02.AutoSize = true;
+            rbWeb02.Location = new Point(659, 231);
+            rbWeb02.Name = "rbWeb02";
+            rbWeb02.Size = new Size(81, 19);
+            rbWeb02.TabIndex = 18;
+            rbWeb02.Text = "SRVWEB02";
+            rbWeb02.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(rbWeb02);
+            Controls.Add(rbWeb01);
+            Controls.Add(btnLogs);
             Controls.Add(btnResetSW);
             Controls.Add(label2);
             Controls.Add(panel1);
@@ -268,5 +306,8 @@
         private Panel panel1;
         private Label label2;
         private Button btnResetSW;
+        private Button btnLogs;
+        private RadioButton rbWeb01;
+        private RadioButton rbWeb02;
     }
 }

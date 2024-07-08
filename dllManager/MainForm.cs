@@ -16,6 +16,8 @@ namespace dllManager
         private string _TestServiceName = "";
         private string _TestServicepath = "";
         private string _WebTest = "";
+        private string _LogsPath = "";
+
 
         public Utils _utils = new Utils();
 
@@ -43,6 +45,7 @@ namespace dllManager
             _TestServiceName = Environment.GetEnvironmentVariable("TEST_SERVICE_NAME") ?? "";
             _TestServicepath = Environment.GetEnvironmentVariable("TEST_SERVICE_PATH") ?? "";
             _WebTest = Environment.GetEnvironmentVariable("WEBTEST") ?? "";
+            _LogsPath = Environment.GetEnvironmentVariable("LOGS_PATH") ?? "";
 
             rbProd.Text = _ServerProdName;
             rbTest.Text = _ServerTestname;
@@ -201,6 +204,21 @@ namespace dllManager
                 MessageBox.Show($"Reiniciando servicios", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
+        }
+
+        private void btnLogs_Click(object sender, EventArgs e)
+        {
+            string path = "";
+            if (rbWeb01.Checked)
+            {
+                path = String.Concat("\\\\",_srvWeb01, _LogsPath);
+              
+            }
+            else if (rbWeb02.Checked){
+                path = String.Concat("\\\\", _srvWeb02, _LogsPath);
+            }
+            _utils.OpenXmlWithNotepad(path);
+
         }
     }
 }
