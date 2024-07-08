@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
+using System.ServiceProcess;
 
 namespace dllManager
 {
@@ -147,6 +148,30 @@ namespace dllManager
                     File.Delete(tempBatPath);
                 }
             }
+        }
+
+        public async Task MonitorStateAsync(CancellationToken cancellationToken)
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                // Aquí se verifica el estado de la cosa.
+                string estado = VerificarEstado("","");
+
+                // Simular trabajo asíncrono
+                await Task.Delay(1000); // Espera 1 segundo antes de la próxima verificación
+
+            }
+        }
+
+        public string VerificarEstado(string serviceName, string serverName)
+        {
+
+            using (ServiceController serviceController = new ServiceController(serviceName, serverName))
+            {
+                return serviceController.Status.ToString();
+            }
+
+          
         }
     }
 }

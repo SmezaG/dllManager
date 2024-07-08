@@ -16,7 +16,7 @@ namespace dllManager
         private string _TestServiceName = "";
         private string _TestServicepath = "";
         private string _WebTest = "";
-        private string _AutoltScriptPath = "";
+        private CancellationTokenSource cancellationTokenSource;
 
         public Utils _utils = new Utils();
 
@@ -29,6 +29,7 @@ namespace dllManager
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            // Cargamos las variables de entorno
             Env.Load();
 
             _ServiceName = Environment.GetEnvironmentVariable("SERVICE_NAME") ?? "";
@@ -43,10 +44,16 @@ namespace dllManager
             _TestServiceName = Environment.GetEnvironmentVariable("TEST_SERVICE_NAME") ?? "";
             _TestServicepath = Environment.GetEnvironmentVariable("TEST_SERVICE_PATH") ?? "";
             _WebTest = Environment.GetEnvironmentVariable("WEBTEST") ?? "";
-            _AutoltScriptPath = Environment.GetEnvironmentVariable("AUTOLT_SCRIPT_PATH") ?? "";
 
             rbProd.Text = _ServerProdName;
             rbTest.Text = _ServerTestname;
+
+            // Preparamos el proceso asincrono de monitorización de Servicios
+            cancellationTokenSource = new CancellationTokenSource();
+            _utils.VerificarEstado(_ServiceName, "srvweb01");
+
+            lbWeb01.Text = $"Web01 - {_ServiceName} - Estado: ";
+            lbWeb02.Text = $"Web02 - {_ServiceName} - Estado: ";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -131,9 +138,9 @@ namespace dllManager
                                     {
                                         File.Delete(newPath);
                                     }
-                                    catch(UnauthorizedAccessException ex) 
+                                    catch (UnauthorizedAccessException ex)
                                     {
-                                        File.Move(newPath, string.Concat(newPath,Guid.NewGuid()));
+                                        File.Move(newPath, string.Concat(newPath, Guid.NewGuid()));
                                     }
                                 }
 
@@ -198,6 +205,9 @@ namespace dllManager
             else if (rbProd.Checked)
             {
                 _utils.ResetProductionServices(_ServiceName, _srvWeb01, _srvWeb02);
+
+                _utils.MonitorStateAsync(cancellationTokenSource.Token);
+
             }
         }
     }

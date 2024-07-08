@@ -45,8 +45,13 @@
             panel1 = new Panel();
             label2 = new Label();
             btnResetSW = new Button();
+            panel2 = new Panel();
+            lbWeb02 = new Label();
+            lbWeb01 = new Label();
+            label3 = new Label();
             panelDll.SuspendLayout();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // btnCopiar
@@ -228,11 +233,50 @@
             btnResetSW.UseVisualStyleBackColor = true;
             btnResetSW.Click += btnResetSW_Click;
             // 
+            // panel2
+            // 
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(lbWeb02);
+            panel2.Controls.Add(lbWeb01);
+            panel2.Location = new Point(291, 322);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(485, 100);
+            panel2.TabIndex = 16;
+            // 
+            // lbWeb02
+            // 
+            lbWeb02.AutoSize = true;
+            lbWeb02.Location = new Point(12, 58);
+            lbWeb02.Name = "lbWeb02";
+            lbWeb02.Size = new Size(43, 15);
+            lbWeb02.TabIndex = 19;
+            lbWeb02.Text = "Web02";
+            // 
+            // lbWeb01
+            // 
+            lbWeb01.AutoSize = true;
+            lbWeb01.Location = new Point(12, 24);
+            lbWeb01.Name = "lbWeb01";
+            lbWeb01.Size = new Size(43, 15);
+            lbWeb01.TabIndex = 18;
+            lbWeb01.Text = "Web01";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(291, 302);
+            label3.Name = "label3";
+            label3.Size = new Size(124, 15);
+            label3.TabIndex = 17;
+            label3.Text = "Estado de los servicios";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label3);
+            Controls.Add(panel2);
             Controls.Add(btnResetSW);
             Controls.Add(label2);
             Controls.Add(panel1);
@@ -245,6 +289,8 @@
             panelDll.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -268,5 +314,9 @@
         private Panel panel1;
         private Label label2;
         private Button btnResetSW;
+        private Panel panel2;
+        private Label lbWeb02;
+        private Label lbWeb01;
+        private Label label3;
     }
 }
