@@ -125,11 +125,13 @@ namespace dllManager
 
                                 if (File.Exists(newPath))
                                 {
+                                    //Intentamos borrar el old (Para poder sobreescribirlo con nuestro old) en el caso de que falle por estar siendo usado
+                                    //Se le renobra con GUID
                                     try
                                     {
                                         File.Delete(newPath);
                                     }
-                                    catch(Exception ex) 
+                                    catch(UnauthorizedAccessException ex) 
                                     {
                                         File.Move(newPath, string.Concat(newPath,Guid.NewGuid()));
                                     }
