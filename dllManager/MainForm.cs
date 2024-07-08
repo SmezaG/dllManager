@@ -16,7 +16,6 @@ namespace dllManager
         private string _TestServiceName = "";
         private string _TestServicepath = "";
         private string _WebTest = "";
-        private CancellationTokenSource cancellationTokenSource;
 
         public Utils _utils = new Utils();
 
@@ -48,12 +47,6 @@ namespace dllManager
             rbProd.Text = _ServerProdName;
             rbTest.Text = _ServerTestname;
 
-            // Preparamos el proceso asincrono de monitorización de Servicios
-            cancellationTokenSource = new CancellationTokenSource();
-            _utils.VerificarEstado(_ServiceName, "srvweb01");
-
-            lbWeb01.Text = $"Web01 - {_ServiceName} - Estado: ";
-            lbWeb02.Text = $"Web02 - {_ServiceName} - Estado: ";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -205,8 +198,7 @@ namespace dllManager
             else if (rbProd.Checked)
             {
                 _utils.ResetProductionServices(_ServiceName, _srvWeb01, _srvWeb02);
-
-                _utils.MonitorStateAsync(cancellationTokenSource.Token);
+                MessageBox.Show($"Reiniciando servicios", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
         }
