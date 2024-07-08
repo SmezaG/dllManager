@@ -38,23 +38,21 @@
             checkBox5 = new CheckBox();
             checkBox6 = new CheckBox();
             panelDll = new Panel();
-            label1 = new Label();
             checkBox9 = new CheckBox();
             checkBox8 = new CheckBox();
             checkBox7 = new CheckBox();
-            panel1 = new Panel();
             label2 = new Label();
             btnResetSW = new Button();
             btnLogs = new Button();
             rbWeb01 = new RadioButton();
             rbWeb02 = new RadioButton();
+            label1 = new Label();
             panelDll.SuspendLayout();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // btnCopiar
             // 
-            btnCopiar.Location = new Point(14, 289);
+            btnCopiar.Location = new Point(14, 335);
             btnCopiar.Name = "btnCopiar";
             btnCopiar.Size = new Size(122, 70);
             btnCopiar.TabIndex = 0;
@@ -65,7 +63,7 @@
             // rbProd
             // 
             rbProd.AutoSize = true;
-            rbProd.Location = new Point(107, 12);
+            rbProd.Location = new Point(94, 33);
             rbProd.Name = "rbProd";
             rbProd.Size = new Size(101, 19);
             rbProd.TabIndex = 1;
@@ -76,7 +74,7 @@
             // 
             rbTest.AutoSize = true;
             rbTest.Checked = true;
-            rbTest.Location = new Point(27, 12);
+            rbTest.Location = new Point(14, 33);
             rbTest.Name = "rbTest";
             rbTest.Size = new Size(49, 19);
             rbTest.TabIndex = 2;
@@ -87,7 +85,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(14, 42);
+            checkBox1.Location = new Point(14, 92);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(109, 19);
             checkBox1.TabIndex = 4;
@@ -97,7 +95,7 @@
             // checkBox2
             // 
             checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(14, 67);
+            checkBox2.Location = new Point(14, 117);
             checkBox2.Name = "checkBox2";
             checkBox2.Size = new Size(86, 19);
             checkBox2.TabIndex = 5;
@@ -107,7 +105,7 @@
             // checkBox3
             // 
             checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(14, 92);
+            checkBox3.Location = new Point(14, 142);
             checkBox3.Name = "checkBox3";
             checkBox3.Size = new Size(154, 19);
             checkBox3.TabIndex = 6;
@@ -117,7 +115,7 @@
             // checkBox4
             // 
             checkBox4.AutoSize = true;
-            checkBox4.Location = new Point(14, 117);
+            checkBox4.Location = new Point(14, 167);
             checkBox4.Name = "checkBox4";
             checkBox4.Size = new Size(154, 19);
             checkBox4.TabIndex = 7;
@@ -127,7 +125,7 @@
             // checkBox5
             // 
             checkBox5.AutoSize = true;
-            checkBox5.Location = new Point(14, 142);
+            checkBox5.Location = new Point(14, 192);
             checkBox5.Name = "checkBox5";
             checkBox5.Size = new Size(171, 19);
             checkBox5.TabIndex = 8;
@@ -137,7 +135,7 @@
             // checkBox6
             // 
             checkBox6.AutoSize = true;
-            checkBox6.Location = new Point(14, 167);
+            checkBox6.Location = new Point(14, 217);
             checkBox6.Name = "checkBox6";
             checkBox6.Size = new Size(111, 19);
             checkBox6.TabIndex = 9;
@@ -148,9 +146,12 @@
             // 
             panelDll.BorderStyle = BorderStyle.FixedSingle;
             panelDll.Controls.Add(label1);
+            panelDll.Controls.Add(rbProd);
             panelDll.Controls.Add(checkBox9);
+            panelDll.Controls.Add(rbTest);
             panelDll.Controls.Add(checkBox8);
             panelDll.Controls.Add(checkBox7);
+            panelDll.Controls.Add(label2);
             panelDll.Controls.Add(btnCopiar);
             panelDll.Controls.Add(checkBox4);
             panelDll.Controls.Add(checkBox6);
@@ -163,19 +164,10 @@
             panelDll.Size = new Size(231, 426);
             panelDll.TabIndex = 10;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(14, 17);
-            label1.Name = "label1";
-            label1.Size = new Size(51, 15);
-            label1.TabIndex = 13;
-            label1.Text = "Librerías";
-            // 
             // checkBox9
             // 
             checkBox9.AutoSize = true;
-            checkBox9.Location = new Point(14, 243);
+            checkBox9.Location = new Point(14, 293);
             checkBox9.Name = "checkBox9";
             checkBox9.Size = new Size(131, 19);
             checkBox9.TabIndex = 12;
@@ -185,7 +177,7 @@
             // checkBox8
             // 
             checkBox8.AutoSize = true;
-            checkBox8.Location = new Point(14, 218);
+            checkBox8.Location = new Point(14, 268);
             checkBox8.Name = "checkBox8";
             checkBox8.Size = new Size(162, 19);
             checkBox8.TabIndex = 11;
@@ -195,27 +187,17 @@
             // checkBox7
             // 
             checkBox7.AutoSize = true;
-            checkBox7.Location = new Point(14, 193);
+            checkBox7.Location = new Point(14, 243);
             checkBox7.Name = "checkBox7";
             checkBox7.Size = new Size(78, 19);
             checkBox7.TabIndex = 10;
             checkBox7.Text = "PJ_PIM.dll";
             checkBox7.UseVisualStyleBackColor = true;
             // 
-            // panel1
-            // 
-            panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(rbProd);
-            panel1.Controls.Add(rbTest);
-            panel1.Location = new Point(519, 28);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(257, 45);
-            panel1.TabIndex = 11;
-            // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(519, 10);
+            label2.Location = new Point(3, 6);
             label2.Name = "label2";
             label2.Size = new Size(50, 15);
             label2.TabIndex = 14;
@@ -223,7 +205,7 @@
             // 
             // btnResetSW
             // 
-            btnResetSW.Location = new Point(519, 105);
+            btnResetSW.Location = new Point(295, 12);
             btnResetSW.Name = "btnResetSW";
             btnResetSW.Size = new Size(122, 70);
             btnResetSW.TabIndex = 15;
@@ -233,7 +215,7 @@
             // 
             // btnLogs
             // 
-            btnLogs.Location = new Point(519, 194);
+            btnLogs.Location = new Point(443, 12);
             btnLogs.Name = "btnLogs";
             btnLogs.Size = new Size(122, 70);
             btnLogs.TabIndex = 16;
@@ -245,7 +227,7 @@
             // 
             rbWeb01.AutoSize = true;
             rbWeb01.Checked = true;
-            rbWeb01.Location = new Point(659, 205);
+            rbWeb01.Location = new Point(583, 23);
             rbWeb01.Name = "rbWeb01";
             rbWeb01.Size = new Size(81, 19);
             rbWeb01.TabIndex = 17;
@@ -256,12 +238,21 @@
             // rbWeb02
             // 
             rbWeb02.AutoSize = true;
-            rbWeb02.Location = new Point(659, 231);
+            rbWeb02.Location = new Point(583, 49);
             rbWeb02.Name = "rbWeb02";
             rbWeb02.Size = new Size(81, 19);
             rbWeb02.TabIndex = 18;
             rbWeb02.Text = "SRVWEB02";
             rbWeb02.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(14, 55);
+            label1.Name = "label1";
+            label1.Size = new Size(192, 15);
+            label1.TabIndex = 19;
+            label1.Text = "_____________________________________";
             // 
             // MainForm
             // 
@@ -272,8 +263,6 @@
             Controls.Add(rbWeb01);
             Controls.Add(btnLogs);
             Controls.Add(btnResetSW);
-            Controls.Add(label2);
-            Controls.Add(panel1);
             Controls.Add(panelDll);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -281,8 +270,6 @@
             Load += Form1_Load;
             panelDll.ResumeLayout(false);
             panelDll.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -299,15 +286,14 @@
         private CheckBox checkBox5;
         private CheckBox checkBox6;
         private Panel panelDll;
-        private Label label1;
         private CheckBox checkBox9;
         private CheckBox checkBox8;
         private CheckBox checkBox7;
-        private Panel panel1;
         private Label label2;
         private Button btnResetSW;
         private Button btnLogs;
         private RadioButton rbWeb01;
         private RadioButton rbWeb02;
+        private Label label1;
     }
 }

@@ -211,10 +211,11 @@ namespace dllManager
             string path = "";
             if (rbWeb01.Checked)
             {
-                path = String.Concat("\\\\",_srvWeb01, _LogsPath);
-              
+                path = String.Concat("\\\\", _srvWeb01, _LogsPath);
+
             }
-            else if (rbWeb02.Checked){
+            else if (rbWeb02.Checked)
+            {
                 path = String.Concat("\\\\", _srvWeb02, _LogsPath);
             }
             _utils.OpenXmlWithNotepad(path);
