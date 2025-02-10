@@ -101,11 +101,6 @@ namespace dllManager
                             selectedServerPath = selectedServerPathOriginal;
                         }
 
-                        if (CheckBox.Text == "PJ_WEBSERVICE_ICCS.dll")
-                        {
-                            webServiceReset = true;
-                        }
-
                         if (File.Exists($"{selectedLocalPath}/{CheckBox.Text}"))
                         {
                             if (File.Exists($"{selectedServerPath}/{CheckBox.Text}"))
@@ -118,10 +113,6 @@ namespace dllManager
                                     DialogResult result = MessageBox.Show($"La dll {CheckBox.Text} no ha sido modificada en mas de 5 minutos. ¿estás seguro que quieres copiarla al servidor?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                                     if (result == DialogResult.No)
                                     {
-                                        if (CheckBox.Text == "PJ_WEBSERVICE_ICCS.dll")
-                                        {
-                                            webServiceReset = false;
-                                        }
                                         continue;
                                     }
                                 }
@@ -158,31 +149,6 @@ namespace dllManager
                     }
                 }
 
-                if (webServiceReset)
-                {
-                    string question = "";
-                    if (rbTest.Checked)
-                    {
-                        question = "el servicio web de test";
-                    }
-                    else if (rbProd.Checked)
-                    {
-                        question = "los srvweb 01 y 02";
-                    }
-
-                    DialogResult result = MessageBox.Show($"Se ha copiado la dll PJ_WEBSERVICE_ICCS.dll, ¿Quieres reiniciar {question}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
-                    {
-                        if (rbTest.Checked)
-                        {
-                        }
-                        else if (rbProd.Checked)
-                        {
-                            _utils.ResetProductionServices(_ServerProdName, _srvWeb01, _srvWeb02);
-                        }
-                    }
-                }
-
                 MessageBox.Show($"Proceso completado correctamente", "Completado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -204,22 +170,6 @@ namespace dllManager
                 MessageBox.Show($"Reiniciando servicios", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
-        }
-
-        private void btnLogs_Click(object sender, EventArgs e)
-        {
-            string path = "";
-            if (rbWeb01.Checked)
-            {
-                path = String.Concat("\\\\", _srvWeb01, _LogsPath);
-
-            }
-            else if (rbWeb02.Checked)
-            {
-                path = String.Concat("\\\\", _srvWeb02, _LogsPath);
-            }
-            _utils.OpenXmlWithNotepad(path);
-
-        }
+        }   
     }
 }

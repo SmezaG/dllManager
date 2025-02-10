@@ -38,15 +38,11 @@
             checkBox5 = new CheckBox();
             checkBox6 = new CheckBox();
             panelDll = new Panel();
+            label1 = new Label();
             checkBox9 = new CheckBox();
             checkBox8 = new CheckBox();
             checkBox7 = new CheckBox();
             label2 = new Label();
-            btnResetSW = new Button();
-            btnLogs = new Button();
-            rbWeb01 = new RadioButton();
-            rbWeb02 = new RadioButton();
-            label1 = new Label();
             panelDll.SuspendLayout();
             SuspendLayout();
             // 
@@ -76,7 +72,7 @@
             rbTest.Checked = true;
             rbTest.Location = new Point(14, 33);
             rbTest.Name = "rbTest";
-            rbTest.Size = new Size(49, 19);
+            rbTest.Size = new Size(51, 19);
             rbTest.TabIndex = 2;
             rbTest.TabStop = true;
             rbTest.Text = "TEST";
@@ -87,7 +83,7 @@
             checkBox1.AutoSize = true;
             checkBox1.Location = new Point(14, 92);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(109, 19);
+            checkBox1.Size = new Size(110, 19);
             checkBox1.TabIndex = 4;
             checkBox1.Text = "PJ_SISTEMAS.dll";
             checkBox1.UseVisualStyleBackColor = true;
@@ -97,7 +93,7 @@
             checkBox2.AutoSize = true;
             checkBox2.Location = new Point(14, 117);
             checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(86, 19);
+            checkBox2.Size = new Size(87, 19);
             checkBox2.TabIndex = 5;
             checkBox2.Text = "PJ_UTILS.dll";
             checkBox2.UseVisualStyleBackColor = true;
@@ -107,9 +103,9 @@
             checkBox3.AutoSize = true;
             checkBox3.Location = new Point(14, 142);
             checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(154, 19);
+            checkBox3.Size = new Size(141, 19);
             checkBox3.TabIndex = 6;
-            checkBox3.Text = "PJ_WEBSERVICE_ICCS.dll";
+            checkBox3.Text = "PanamaJack_SGILayer";
             checkBox3.UseVisualStyleBackColor = true;
             // 
             // checkBox4
@@ -164,6 +160,15 @@
             panelDll.Size = new Size(231, 426);
             panelDll.TabIndex = 10;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(14, 55);
+            label1.Name = "label1";
+            label1.Size = new Size(192, 15);
+            label1.TabIndex = 19;
+            label1.Text = "_____________________________________";
+            // 
             // checkBox9
             // 
             checkBox9.AutoSize = true;
@@ -203,66 +208,11 @@
             label2.TabIndex = 14;
             label2.Text = "Servidor";
             // 
-            // btnResetSW
-            // 
-            btnResetSW.Location = new Point(295, 12);
-            btnResetSW.Name = "btnResetSW";
-            btnResetSW.Size = new Size(122, 70);
-            btnResetSW.TabIndex = 15;
-            btnResetSW.Text = "Reiniciar Servicios Web";
-            btnResetSW.UseVisualStyleBackColor = true;
-            btnResetSW.Click += btnResetSW_Click;
-            // 
-            // btnLogs
-            // 
-            btnLogs.Location = new Point(443, 12);
-            btnLogs.Name = "btnLogs";
-            btnLogs.Size = new Size(122, 70);
-            btnLogs.TabIndex = 16;
-            btnLogs.Text = "Logs SW";
-            btnLogs.UseVisualStyleBackColor = true;
-            btnLogs.Click += btnLogs_Click;
-            // 
-            // rbWeb01
-            // 
-            rbWeb01.AutoSize = true;
-            rbWeb01.Checked = true;
-            rbWeb01.Location = new Point(583, 23);
-            rbWeb01.Name = "rbWeb01";
-            rbWeb01.Size = new Size(81, 19);
-            rbWeb01.TabIndex = 17;
-            rbWeb01.TabStop = true;
-            rbWeb01.Text = "SRVWEB01";
-            rbWeb01.UseVisualStyleBackColor = true;
-            // 
-            // rbWeb02
-            // 
-            rbWeb02.AutoSize = true;
-            rbWeb02.Location = new Point(583, 49);
-            rbWeb02.Name = "rbWeb02";
-            rbWeb02.Size = new Size(81, 19);
-            rbWeb02.TabIndex = 18;
-            rbWeb02.Text = "SRVWEB02";
-            rbWeb02.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(14, 55);
-            label1.Name = "label1";
-            label1.Size = new Size(192, 15);
-            label1.TabIndex = 19;
-            label1.Text = "_____________________________________";
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(rbWeb02);
-            Controls.Add(rbWeb01);
-            Controls.Add(btnLogs);
-            Controls.Add(btnResetSW);
             Controls.Add(panelDll);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -271,7 +221,6 @@
             panelDll.ResumeLayout(false);
             panelDll.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -290,10 +239,6 @@
         private CheckBox checkBox8;
         private CheckBox checkBox7;
         private Label label2;
-        private Button btnResetSW;
-        private Button btnLogs;
-        private RadioButton rbWeb01;
-        private RadioButton rbWeb02;
         private Label label1;
     }
 }
